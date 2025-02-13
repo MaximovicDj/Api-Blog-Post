@@ -21,9 +21,9 @@ class CategoryResource extends JsonResource
                 'name' => $this->name,
                 'status' => $this->status,
                 $this->mergeWhen($request->routeIs('categories.show', 'categories.store'), [
-                    'createdAt' => $this->created_at->format('Y-m-d H:i:s'),
-                    'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
-                    'softDeleted' => $this->deleted_at ? $this->deleted_at->format('Y-m-d H:i:s') : null,
+                    'createdAt' => optional($this->created_at->format('Y-m-d H:i:s')),
+                    'updated_at' => optional($this->updated_at->format('Y-m-d H:i:s')),
+                    'softDeleted' => optional($this->deleted_at->format('Y-m-d H:i:s')),
                 ])
             ]
         ];
