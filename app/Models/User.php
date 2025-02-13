@@ -51,4 +51,17 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole(string $role): bool
+    {
+        if($this->role->name == $role)
+        {
+            return true;
+        }
+        return false;
+    }
 }
