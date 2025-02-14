@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,5 +14,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('users', UserController::class);
         Route::patch('users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');
     });
+
+    Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
