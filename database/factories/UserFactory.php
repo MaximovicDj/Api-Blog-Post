@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'role_id' => \App\Models\Role::where('name', 'user')->value('id'),
+            'role_id' => \App\Models\Role::whereIn('name', ['user', 'editor'])->value('id'),
             'remember_token' => Str::random(10),
         ];
     }

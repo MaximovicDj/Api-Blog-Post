@@ -28,7 +28,7 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('ApiToken',
-            [Abilities::setAbilities($user, $user->role->name)]
+            Abilities::setAbilities($user)
         )->plainTextToken;
         return $this->successResponse('Successful login',
             [
