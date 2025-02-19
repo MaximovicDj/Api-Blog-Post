@@ -27,10 +27,11 @@ class PostController extends Controller
         {
             return PostResource::collection(Post::with(['user', 'category'])->paginate(10));
         }
-        else
+        else if($user->tokenCan(Abilities::VIEW_OWN_POSTS))
         {
             return PostResource::collection(Post::with(['user', 'category'])->where('user_id', $user->id)->paginate(10));
         }
+        else return $this->errorResponse('You are not authorized to view posts', [], 403);
     }
 
     /**

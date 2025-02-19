@@ -47,7 +47,10 @@ class PostResource extends JsonResource
             'links' => [
                 'self' => route('posts.show', $this->id),
             ],
-            'included' => new UserResource($this->user)
+            'included' => [
+                new UserResource($this->user),
+                CommentResource::collection($this->comments)
+            ]
         ];
     }
 }
