@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\CommentController;
 use App\Http\Controllers\Api\V1\PostController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\UserController;
@@ -21,5 +22,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::apiResource('posts', PostController::class);
+
+    Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('posts.comments.store');
+    Route::patch('posts/{post}/comments/{comment}', [CommentController::class, 'update'])->name('posts.comments.update');
+    Route::delete('posts/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('posts.comments.destroy');
 
 });

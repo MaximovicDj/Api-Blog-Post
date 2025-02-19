@@ -19,6 +19,13 @@ final class Abilities
     public const VIEW_OWN_POST = 'view:own:post';
     public const VIEW_OWN_POSTS = 'view:own:posts';
 
+    public const COMMENT_ALL_POSTS = 'comment:all:posts';
+    public const UPDATE_ALL_COMMENTS = 'update:all:comments';
+    public const DELETE_ALL_COMMENTS = 'delete:all:comments';
+    public const DELETE_RELATED_COMMENT = 'delete:related:comment';
+    public const UPDATE_OWN_COMMENT = 'edit:own:comment';
+    public const DELETE_OWN_COMMENT = 'delete:own:comment';
+
 
     /**
      * @param User $user
@@ -34,6 +41,9 @@ final class Abilities
                 self::VIEW_ALL_POSTS,
                 self::VIEW_ANY_POST,
                 self::CREATE_POST,
+                self::COMMENT_ALL_POSTS,
+                self::UPDATE_ALL_COMMENTS,
+                self::DELETE_ALL_COMMENTS,
             ];
         }
         if($user->hasRole('editor'))
@@ -44,7 +54,21 @@ final class Abilities
                 self::DELETE_OWN_POST,
                 self::VIEW_OWN_POST,
                 self::VIEW_OWN_POSTS,
+                self::COMMENT_ALL_POSTS,
+                self::UPDATE_OWN_COMMENT,
+                self::DELETE_OWN_COMMENT,
+                self::DELETE_RELATED_COMMENT,
+
             ];
         }
+        if($user->hasRole('user'))
+        {
+            return [
+                self::COMMENT_ALL_POSTS,
+                self::UPDATE_OWN_COMMENT,
+                self::DELETE_OWN_COMMENT
+            ];
+        }
+        return [];
     }
 }
